@@ -4,7 +4,19 @@
 rm -rf repository/*-*-*-*-*
 ```
 
-1. settings.xmlの初期化
+2. settings.xmlの初期化
+
+3. Anypoint Studioの最適化
+```/Applications/AnypointStudio.app/Contents/Eclipse/AnypointStudio.ini```
+
+```
+// 最大Heapを調整
+13c13
+< -Xmx6000m
+---
+> -Xmx1024m
+```
+
 
 # Production Ready Development Practice
 ## Day1
