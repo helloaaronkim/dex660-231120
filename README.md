@@ -1,8 +1,10 @@
 # 事前確認
-1. Repositoryの整理
+1. Repositoryの整理 
+```
 rm -rf repository/*-*-*-*-*
+```
 
-2. settings.xmlの初期化
+1. settings.xmlの初期化
 
 # Production Ready Development Practice
 ## Day1
