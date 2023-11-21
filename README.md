@@ -25,9 +25,10 @@ rm -rf repository/*-*-*-*-*
 
 ### Information
 * Organization
-  * orgid : TBU
-  * clientid : TBU
-  * clientsecret : TBU
+  * orgid : 16519426-0a08-4492-aa32-f1a70eb20e0f
+  * clientid : 8a5328dced224cfb8ea193c9806d8227
+  * clientsecret : e996F242FBe64c3f93d993eBBCf7F9dd
+
 * ConnectedApps
   * Exchange Viewer
     * TBU
@@ -40,7 +41,7 @@ rm -rf repository/*-*-*-*-*
     * TBU
 
 * API key
-  * prod : TBU
+  * prod : 19120724
   * test : TBU
   * dev : TBU
 
