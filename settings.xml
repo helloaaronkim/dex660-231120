@@ -1,0 +1,19 @@
+<settings>
+    <servers>
+        <server>
+            <id>anypoint-exchange-v3</id>
+            <username>~~~Client~~~</username>
+            <password>854f4a4869c948349ea9b103e04399c1~?~cDAEE50d73E0475DbF9986721E595fC7</password>
+        </server>
+        <server>
+            <id>anypoint-exchange-v3-student-deployment</id>
+            <username>~~~Client~~~</username>
+            <password>520721bb7d2e4bd4b49adc6ab6ab5a8c~?~4df8F34e6949450b8a39620253300851</password>
+        </server>
+        <server>
+            <id>releases-ee</id>
+            <username>muletraining.nexus</username>
+            <password>eApHMgTm</password>
+        </server>
+    </servers>
+</settings>

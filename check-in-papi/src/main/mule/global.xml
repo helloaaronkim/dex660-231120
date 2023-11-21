@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
 http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd 
 http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd 
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
 
 	<tls:context name="apiTLSContext">
-		<tls:key-store type="pkcs12" path="certs/check-in-papi.p12" password="mule12345" keyPassword="mule12345" alias="server" />
+		<tls:key-store type="${tls.keystore.type}" path="${tls.keystore.path}" password="${secure::tls.keystore.password}"
+			keyPassword="${secure::tls.keystore.keyPassword}" alias="${tls.keystore.alias}" />
 	</tls:context>
-
 	<http:listener-config name="apiHttpListenerConfig">
-		<http:listener-connection host="0.0.0.0" port="8081" protocol="HTTPS" tlsContext="apiTLSContext" />
+		<http:listener-connection host="0.0.0.0" protocol="HTTPS" port="${https.port}" tlsContext="apiTLSContext" />
 	</http:listener-config>
-
-	<api-gateway:autodiscovery apiId="19120724" ignoreBasePath="true" doc:name="API Autodiscovery"
-		doc:id="b3928d4c-061b-4be5-ad36-a0220d04c3fd" flowRef="api-main" />
-
+	
+	<api-gateway:autodiscovery apiId="${api.id}" flowRef="api-main" />
+	<configuration-properties doc:name="Configuration properties" file="props/properties.yaml" />
+	<configuration-properties doc:name="Configuration properties" doc:id="49c8434b-42ee-4ac7-9b5f-0e332b593181" file="props/${env}-properties.yaml" />
+	<global-property doc:name="Global Property" doc:id="3c706c7d-0249-4cf6-962d-c07bb88a50b6" name="env" value="dev" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="82e63e89-be93-4327-a91f-a9ce4d429485" file="props/${env}-secure-properties.yaml" key="${encrypt.key}" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
 </mule>

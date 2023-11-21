@@ -31,14 +31,20 @@ rm -rf repository/*-*-*-*-*
 
 * ConnectedApps
   * Exchange Viewer
-    * TBU
-    * TBU
+    * 854f4a4869c948349ea9b103e04399c1
+    * cDAEE50d73E0475DbF9986721E595fC7
   * Exchange Contributor
-    * TBU
-    * TBU
+    * 520721bb7d2e4bd4b49adc6ab6ab5a8c
+    * 4df8F34e6949450b8a39620253300851
   * CH Deployment
-    * TBU
-    * TBU
+    * af6925f3ebeb4388b56ed010e9c12b46
+    * c46c14Dc106B4ac2bB62a91b350984a9
+
+mvn -DmuleDeploy deploy -Dap.client_id=8a5328dced224cfb8ea193c9806d8227 -Dap.client_secret=e996F242FBe64c3f93d993eBBCf7F9dd -Dap.ca.client_id=af6925f3ebeb4388b56ed010e9c12b46 -Dap.ca.client_secret=c46c14Dc106B4ac2bB62a91b350984a9
+
+
+mvn -DmuleDeploy deploy -Dap.client_id=8a5328dced224cfb8ea193c9806d8227 -Dap.client_secret=e996F242FBe64c3f93d993eBBCf7F9dd -Dap.ca.client_id=af6925f3ebeb4388b56ed010e9c12b46 -Dap.ca.client_secret=c46c14Dc106B4ac2bB62a91b350984a9 -Dencrypt.key=secure12345 -Ddeployment.env=dev
+
 
 * API key
   * prod : 19120724
