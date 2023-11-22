@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+<mule xmlns:tracing="http://www.mulesoft.org/schema/mule/tracing" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/tracing http://www.mulesoft.org/schema/mule/tracing/current/mule-tracing.xsd">
 	<flow name="payment-approval-by-pnr" doc:id="c76824df-77f3-41ee-a2bc-6b67c904bca9" >
 		<ee:transform doc:name="Transform Message">
 			<ee:variables>
@@ -33,6 +34,11 @@ output application/json
 		</ee:transform>
 	</flow>
 	<flow name="check-in-by-pnr" doc:id="12a6aad8-357d-4f8e-9478-1c8945ce7178" >
+		<tracing:set-logging-variable doc:name="Set logging variable" doc:id="a5fb1ba8-7cb1-4d9f-814c-5e7bbbf66d2b" variableName="aaron" value="#['testValue']"/>
+		<tracing:set-logging-variable doc:name="Set logging variable" doc:id="0ef51db3-2176-4bfb-9a3e-4a9a7a8228d3" variableName="aaron2" value="#['これはどうでしょう。']"/>
+		<flow-ref doc:name="check-in-flights-management" doc:id="94cf8660-991c-43f5-9028-51e7b377d683" name="check-in-flights-management"/>
+		<flow-ref doc:name="register-passenger-data" doc:id="c0f09dc0-e695-4f15-abb9-26569d7e415d" name="register-passenger-data"/>
+		<flow-ref doc:name="create-payment-for-bags" doc:id="57ae6323-31fc-48c9-af3d-418c7dbe39d8" name="create-payment-for-bags"/>
 		<ee:transform doc:name="Transform Message">
 			<ee:variables>
 				<ee:set-variable variableName="PNR">attributes.uriParams.'PNR'</ee:set-variable>
@@ -48,5 +54,17 @@ output application/json
 } as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="5051299c-ead0-4ca4-afe0-4fa451803fec" />
 	</flow>
+
+	<flow name="check-in-flights-management" doc:id="7eee9144-d29b-4302-8874-2a30d5e6a9ec">
+    	<logger />
+    </flow>
+    <flow name="register-passenger-data" doc:id="d6f5681a-5301-44bc-9928-ed260c6b81c3">
+    	<logger />
+    </flow>
+    <flow name="create-payment-for-bags" doc:id="2e631bc4-02d7-4528-8a3d-a6612dfbade2">
+    	<logger />
+	</flow>	
+
 </mule>
